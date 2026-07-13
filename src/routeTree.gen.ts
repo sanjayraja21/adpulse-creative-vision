@@ -9,38 +9,153 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppStrategistRouteImport } from './routes/_app.strategist'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppScoutRouteImport } from './routes/_app.scout'
+import { Route as AppHistoryRouteImport } from './routes/_app.history'
+import { Route as AppFatigueRouteImport } from './routes/_app.fatigue'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCreativeRouteImport } from './routes/_app.creative'
+import { Route as AppAnalystRouteImport } from './routes/_app.analyst'
 
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppStrategistRoute = AppStrategistRouteImport.update({
+  id: '/strategist',
+  path: '/strategist',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppScoutRoute = AppScoutRouteImport.update({
+  id: '/scout',
+  path: '/scout',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFatigueRoute = AppFatigueRouteImport.update({
+  id: '/fatigue',
+  path: '/fatigue',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCreativeRoute = AppCreativeRouteImport.update({
+  id: '/creative',
+  path: '/creative',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalystRoute = AppAnalystRouteImport.update({
+  id: '/analyst',
+  path: '/analyst',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analyst': typeof AppAnalystRoute
+  '/creative': typeof AppCreativeRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/fatigue': typeof AppFatigueRoute
+  '/history': typeof AppHistoryRoute
+  '/scout': typeof AppScoutRoute
+  '/settings': typeof AppSettingsRoute
+  '/strategist': typeof AppStrategistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analyst': typeof AppAnalystRoute
+  '/creative': typeof AppCreativeRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/fatigue': typeof AppFatigueRoute
+  '/history': typeof AppHistoryRoute
+  '/scout': typeof AppScoutRoute
+  '/settings': typeof AppSettingsRoute
+  '/strategist': typeof AppStrategistRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/analyst': typeof AppAnalystRoute
+  '/_app/creative': typeof AppCreativeRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/fatigue': typeof AppFatigueRoute
+  '/_app/history': typeof AppHistoryRoute
+  '/_app/scout': typeof AppScoutRoute
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/strategist': typeof AppStrategistRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analyst'
+    | '/creative'
+    | '/dashboard'
+    | '/fatigue'
+    | '/history'
+    | '/scout'
+    | '/settings'
+    | '/strategist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analyst'
+    | '/creative'
+    | '/dashboard'
+    | '/fatigue'
+    | '/history'
+    | '/scout'
+    | '/settings'
+    | '/strategist'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/analyst'
+    | '/_app/creative'
+    | '/_app/dashboard'
+    | '/_app/fatigue'
+    | '/_app/history'
+    | '/_app/scout'
+    | '/_app/settings'
+    | '/_app/strategist'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +163,93 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/strategist': {
+      id: '/_app/strategist'
+      path: '/strategist'
+      fullPath: '/strategist'
+      preLoaderRoute: typeof AppStrategistRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/scout': {
+      id: '/_app/scout'
+      path: '/scout'
+      fullPath: '/scout'
+      preLoaderRoute: typeof AppScoutRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/history': {
+      id: '/_app/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/fatigue': {
+      id: '/_app/fatigue'
+      path: '/fatigue'
+      fullPath: '/fatigue'
+      preLoaderRoute: typeof AppFatigueRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/creative': {
+      id: '/_app/creative'
+      path: '/creative'
+      fullPath: '/creative'
+      preLoaderRoute: typeof AppCreativeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analyst': {
+      id: '/_app/analyst'
+      path: '/analyst'
+      fullPath: '/analyst'
+      preLoaderRoute: typeof AppAnalystRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAnalystRoute: typeof AppAnalystRoute
+  AppCreativeRoute: typeof AppCreativeRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppFatigueRoute: typeof AppFatigueRoute
+  AppHistoryRoute: typeof AppHistoryRoute
+  AppScoutRoute: typeof AppScoutRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppStrategistRoute: typeof AppStrategistRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAnalystRoute: AppAnalystRoute,
+  AppCreativeRoute: AppCreativeRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppFatigueRoute: AppFatigueRoute,
+  AppHistoryRoute: AppHistoryRoute,
+  AppScoutRoute: AppScoutRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppStrategistRoute: AppStrategistRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
