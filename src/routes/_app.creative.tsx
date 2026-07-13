@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 import { PageHeader, StatusBadge } from "@/components/page-header";
 
 export const Route = createFileRoute("/_app/creative")({
-  component: Creative;
+  component: Creative,
 });
 
 const variants = [
